@@ -21,6 +21,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Customer>> GetAll()
         {
+            //var customer = _customerdal.get() burda kaldım customerin productlarını eklemeye çalışıyordum
+
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
     }
