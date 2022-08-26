@@ -12,6 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         DbSet<Customer> customers { get; set; }
         DbSet<Product> products { get; set; }
+        DbSet<Answers> answers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

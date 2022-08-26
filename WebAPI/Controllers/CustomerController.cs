@@ -1,6 +1,9 @@
 ﻿using Business.Abstract;
+using Entities.Concrete;
+using Entities.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Wkhtmltopdf.NetCore;
 
 namespace WebAPI.Controllers
 {
@@ -15,6 +18,7 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
+        
 
         [HttpGet("getall")]
         public IActionResult GetAll()

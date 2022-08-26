@@ -1,0 +1,144 @@
+﻿@model Entities.Dto.forPdfDto
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        .main{
+            padding: 0;
+        }
+        .customerInfo{
+            width: 50%;
+            background-color: rgb(32,172,179);
+            padding-left: 5px;
+        }
+        .ortala{
+            width:30%;
+            margin-left: 180px;
+            padding:1px;
+        }
+        .leftInfo{
+            width:30%
+            
+        }
+        .rightInfo {
+            width: 70%
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-danger">QUOTAION</h2>
+            <div class="col-6 bg-info text-dark">
+                <div class="col-4 float-end">
+                    <p></p>
+                    <p>TO :</p>
+                    <p>ATTN :</p>
+                    <p>VESSEL :</p>
+                    <p>DELİVERY PORT :</p>
+                    <p>REF :</p>
+                    <p>DATE :</p>
+                    <p>CUR :</p>
+                    <p>DISCOUNT (%) :</p>
+                    <p>PAYMENT TERMS :</p>
+                    <p>DELIVERY CHARGES :</p>
+                    <p>BOAT SERVİCE FEE :</p>
+                    <p>FREIGHT COST :</p>
+                    <p>CUSTOMS COST :</p>
+                    <p> </p>
+                    <p>INCOTERMS :</p>
+                </div>
+                <div class="col-8">
+                    <p>@Model.Customer.CustomerName</p>
+                    <p>@Model.Customer.To</p>
+                    <p>@Model.Customer.Attn</p>
+                    <p>@Model.Customer.Vessel</p>
+                    <p>@Model.Customer.DeliveryPort</p>
+                    <p>@Model.Customer.Ref</p>
+                    <p>@Model.Customer.Date</p>
+                    <p>@Model.Customer.Cur</p>
+                    <p>@Model.Customer.Discount</p>
+                    <p>@Model.Customer.PaymentTerms</p>
+                    <p>@Model.Customer.DeliveryCharges</p>
+                    <p>@Model.Customer.BoatServiceFee</p>
+                    <p>@Model.Customer.FreightCost</p>
+                    <p>@Model.Customer.CustomsCost</p>
+                    <p> </p>
+                    <p>@Model.Customer.Incoterms</p>
+                </div>
+
+            </div>
+        </div>
+        
+    </div>
+    @foreach (var item in Model.Products)
+    {
+        <div class="ortala">
+            <table class="table table-bordered border-dark">
+                <tbody>
+                    <tr>
+                        <th class="bg-info text-danger"><h4>Req. NO: @item.RefNo</h4></th>
+                    </tr>
+                    <tr class="bg-info text-danger">
+                        <th class="bg-info text-danger"><h4>P.O. NO: @item.PONO</h4></th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <table class="table table-dark table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th colspan="2"></th>
+                    <th colspan="3">REQUIRED</th>
+                    <th></th>
+                    <th class="bg-info" colspan="3">ALTERNATİVE PACKAGING</th>
+                    <th class="bg-info text-danger">REMARKS</th>
+                </tr>
+                <tr>
+                    <th>NO</th>
+                    <th>Code</th>
+                    <th>Description</th>
+                    <th>Qnty</th>
+                    <th>Unit</th>
+                    <th>Price</th>
+                    <th class="bg-warning bg-opacity-25">Total</th>
+                    <th class="bg-info">Qnty</th>
+                    <th class="bg-info">Unit</th>
+                    <th class="bg-info">Price</th>
+                    <th class="bg-info"></th>
+                </tr>                 
+            </thead>
+            <tbody>
+                @foreach (var answers in Model.Answers)
+                {
+                    <tr>
+                        <td>@answers.No</td>
+                        <td>@answers.Code</td>
+                        <td>@answers.Description</td>
+                        <td>@answers.Qnty</td>
+                        <td>@answers.Unit</td>
+                        <td>@answers.Price</td>
+                        <td class="bg-warning bg-opacity-25">@answers.total</td>
+                        <td class="bg-info">@answers.AlterNativeQnty</td>
+                        <td class="bg-info">@answers.AlterNativeUnit</td>
+                        <td class="bg-info">@answers.AlterNativePrice</td>
+                        <td class="bg-info text-danger">@answers.Remarks</td>
+                    </tr>
+                }
+                
+
+            </tbody>
+        </table>
+        <div class="mt-8 mr-6 float-end">
+            <h5>SUBTOTAL:     @item.SubTotal</h5>
+            <h5>TOTAL:        @item.AllTotal</h5>
+        </div>
+    }
+    
+</body>
+</html>

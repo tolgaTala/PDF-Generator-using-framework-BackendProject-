@@ -22,6 +22,61 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Entities.Concrete.Answers", b =>
+                {
+                    b.Property<int>("AnswerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"), 1L, 1);
+
+                    b.Property<int>("AlterNativePrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AlterNativeQnty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AlterNativeUnit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("No")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Qnty")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Unit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("total")
+                        .HasColumnType("int");
+
+                    b.HasKey("AnswerId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("answers");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Customer", b =>
                 {
                     b.Property<int>("CustomerId")
@@ -104,55 +159,18 @@ namespace DataAccess.Migrations
                     b.Property<int>("AllTotal")
                         .HasColumnType("int");
 
-                    b.Property<int>("AlterNativePrice")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
-
-                    b.Property<int>("AlterNativeQnty")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AlterNativeUnit")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("No")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PONO")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Qnty")
-                        .HasColumnType("int");
-
                     b.Property<string>("RefNo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Remarks")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("SubTotal")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Unit")
-                        .HasColumnType("int");
-
-                    b.Property<int>("total")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
@@ -162,16 +180,32 @@ namespace DataAccess.Migrations
                     b.ToTable("products");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Answers", b =>
+                {
+                    b.HasOne("Entities.Concrete.Product", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Entities.Concrete.Product", b =>
                 {
                     b.HasOne("Entities.Concrete.Customer", null)
                         .WithMany("Products")
-                        .HasForeignKey("CustomerId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Entities.Concrete.Customer", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Product", b =>
+                {
+                    b.Navigation("Answers");
                 });
 #pragma warning restore 612, 618
         }
