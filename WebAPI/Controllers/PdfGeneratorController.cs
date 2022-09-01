@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Entities.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Wkhtmltopdf.NetCore;
+using Entities.Concrete;
+using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
@@ -24,19 +26,41 @@ namespace WebAPI.Controllers
             _generatePdf = generatePdf;
         }
 
-        [HttpGet("getpdf")]
-        public async Task<IActionResult> Getpdf()
+        [HttpGet("dekont")]
+        public async Task<IActionResult> Getpdf(int customerId)
         {
-            var resultCustomer = _customerService.GetAll();
-            var resultProduct = _productService.GetAll(resultCustomer.Data[0].CustomerId);
-            var resultAnswers = _answersService.GetAll(resultProduct.Data[0].ProductId);
-
             forPdfDto forPdfDto = new forPdfDto();
-            forPdfDto.Customer = resultCustomer.Data[0];
+            //kullanıcı Idsine göre geliyor
+            var resultCustomer = _customerService.Get(customerId);
+            var resultProduct = _productService.GetAll(resultCustomer.Data.CustomerId);
+            List<List<Answers>> resultAnswers = new List<List<Answers>>();
+            for (int i = 0; i < resultProduct.Data.Count; i++)
+            {
+                var resultAnswer = _answersService.GetAll(resultProduct.Data[i].ProductId);
+                resultAnswers.Add(resultAnswer.Data);
+                resultProduct.Data[i].AllTotal = 0;
+                resultProduct.Data[i].SubTotal = 0;
+                foreach (var item in resultAnswer.Data)
+                {                    
+                    item.total = item.Qnty * item.Price;
+                    resultProduct.Data[i].SubTotal += item.total;
+                    resultProduct.Data[i].AllTotal += item.total;
+                    
+                }
+
+                resultCustomer.Data.GrandTotal += resultProduct.Data[i].AllTotal;
+            }
+            
+            
+
+
+            forPdfDto.Customer = resultCustomer.Data;
             forPdfDto.Products = resultProduct.Data;
-            forPdfDto.Answers = resultAnswers.Data;
+            forPdfDto.Answers = resultAnswers;
 
             return await _generatePdf.GetPdf("Views/pdfPage.cshtml", forPdfDto);
         }
+        
+
     }
 }

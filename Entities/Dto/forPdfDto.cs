@@ -12,6 +12,6 @@ namespace Entities.Dto
     {
         public Customer Customer { get; set; }
         public List<Product> Products { get; set; }
-        public List<Answers> Answers { get; set; }
+        public List<List<Answers>> Answers { get; set; }
     }
 }

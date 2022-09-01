@@ -27,6 +27,7 @@ namespace Entities.Concrete
         public string Incoterms { get; set; }
         public List<Product> Products { get; set; }
         public int GrandTotal { get; set; }
+        public string PhotoPath { get; set; }
 
     }
 }

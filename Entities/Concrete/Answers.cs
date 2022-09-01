@@ -16,7 +16,7 @@ namespace Entities.Concrete
         public string Code { get; set; }
         public string Description { get; set; }
         public int Qnty { get; set; }
-        public int Unit { get; set; }
+        public string Unit { get; set; }
         public int Price { get; set; }
         public int AlterNativeQnty { get; set; }
         public int AlterNativeUnit { get; set; }
