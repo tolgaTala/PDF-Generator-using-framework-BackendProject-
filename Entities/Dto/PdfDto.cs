@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Entities.Dto
 {
-    public class forPdfDto:IDto
+    public class PdfDto:IDto
     {
         public Customer Customer { get; set; }
         public List<Product> Products { get; set; }
-        public List<List<Answers>> Answers { get; set; }
+        public List<List<Answers>> ProductsAnswers { get; set; }
     }
 }

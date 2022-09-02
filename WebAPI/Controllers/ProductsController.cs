@@ -15,10 +15,10 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("getall")]
-        public IActionResult GetAll(int customerId)
+        [HttpGet("getproductsbycustomerid")]
+        public IActionResult GetProductsByCustomerId(int customerId)
         {
-            var result = _productService.GetAll(customerId);
+            var result = _productService.GetProductsByCustomerId(customerId);
             if (result.Success)
             {
                 return Ok(result);

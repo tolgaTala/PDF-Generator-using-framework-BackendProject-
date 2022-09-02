@@ -10,6 +10,6 @@ namespace Business.Abstract
 {
     public interface IAnswersService
     {
-        IDataResult<List<Answers>> GetAll(int productId);
+        IDataResult<List<Answers>> GetAnswersByProductId(int productId);
     }
 }

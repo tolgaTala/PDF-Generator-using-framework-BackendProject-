@@ -19,7 +19,7 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        public IDataResult<List<Product>> GetAll(int customerId)
+        public IDataResult<List<Product>> GetProductsByCustomerId(int customerId)
         {
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(x=>x.CustomerId == customerId));
         }

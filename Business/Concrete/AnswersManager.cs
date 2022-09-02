@@ -20,7 +20,7 @@ namespace Business.Concrete
             _answersDal = answersDal;
         }
 
-        public IDataResult<List<Answers>> GetAll(int productId)
+        public IDataResult<List<Answers>> GetAnswersByProductId(int productId)
         {
             return new SuccessDataResult<List<Answers>>(_answersDal.GetAll(x => x.ProductId == productId));
         }

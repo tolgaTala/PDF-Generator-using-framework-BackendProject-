@@ -16,14 +16,12 @@ namespace WebAPI.Controllers
         public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
-        }
+        }       
 
-        
-
-        [HttpGet("getall")]
-        public IActionResult GetAll(int customerId)
+        [HttpGet("getcustomerbyId")]
+        public IActionResult GetCustomerById(int customerId)
         {
-            var result = _customerService.Get(customerId);
+            var result = _customerService.GetCustomerById(customerId);
             if (result.Success)
             {
                 return Ok(result);
