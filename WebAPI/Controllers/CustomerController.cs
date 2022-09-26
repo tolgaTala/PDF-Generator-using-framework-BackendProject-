@@ -3,7 +3,6 @@ using Entities.Concrete;
 using Entities.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Wkhtmltopdf.NetCore;
 
 namespace WebAPI.Controllers
 {
@@ -13,11 +12,12 @@ namespace WebAPI.Controllers
     {
         ICustomerService _customerService;
 
+
         public CustomerController(ICustomerService customerService)
         {
             _customerService = customerService;
-        }       
-
+        }
+        
         [HttpGet("getcustomerbyId")]
         public IActionResult GetCustomerById(int customerId)
         {
@@ -28,5 +28,6 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+         
     }
 }
